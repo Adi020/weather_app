@@ -57,7 +57,7 @@ function App() {
           grid-rows-[1fr_auto_0.7fr] max-[640px]:grid-cols-[minmax(auto,_400px)] max-[640px]:items-center
           place-content-center max-[640px]:grid-rows-[auto_auto_1fr] font-principal-font`}
       >
-        <h1 className="py-4 font-semibold text-xl">Wheater App</h1>
+        <h1 className="py-4 font-semibold text-xl">Weather App</h1>
         <form className="w-full min-[640px]:pt-4" onSubmit={handleSubmit}>
           <div className="flex p-[2px] overflow-hidden justify-center items-center bg-[#53a8ca] rounded-3xl h-10">
             <button className="w-9 flex justify-center"><i className="bx bx-search text-xl"></i></button>
