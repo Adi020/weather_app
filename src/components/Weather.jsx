@@ -9,7 +9,7 @@ const Weather = ({ weatherInfo }) => {
   };
 
   return (
-    <section className="min-[640px]:col-start-2">
+    <section className="min-[640px]:col-start-2 mt-4">
       <section className="grid gap-y-20">
         <article className="p-2 grid gap-y-3 grid-cols-[1fr_auto] relative after:content-[''] after:absolute 
         after:top-0 after:left-0 after:bg-[#56a6d7] after:rounded-3xl after:w-full after:h-[50%] before:absolute before:content-['']
