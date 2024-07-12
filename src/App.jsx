@@ -27,26 +27,8 @@ function App() {
       .catch((err) => console.error(err));
   };
 
-  // Función de éxito para obtener la posición actual
-  const success = (pos) => {
-    const lat = pos.coords.latitude;
-    const lon = pos.coords.longitude;
-    fetchWeather(lat, lon);
-  };
-
-  // Manejador para el envío del formulario
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    const city = e.target.cityName.value;
-    setCityName(city)
-  };
-
-  // Efecto para obtener la ubicación actual al montar el componente
-  useEffect(() => {
-    navigator.geolocation.getCurrentPosition(success);
-  }, []);
-
-  useEffect(() => {
+  //función para manejar la obtencion de las ciudades
+  const fetchCities = (fun) => {
     const API_KEY = "f65121de84823584a220722a6bcba375";
     const URLCity = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${API_KEY}`;
 
@@ -56,9 +38,13 @@ function App() {
         try {
           const { data } = await axios.get(URLCity)
           setCitiesInfo(data)
-          setLoadingCities(false)
         } catch (err) {
           console.log(err)
+        } finally {
+          setLoadingCities(false)
+          if (fun) {
+            fun()
+          }
         }
       }
       fetchData()
@@ -66,7 +52,26 @@ function App() {
       setCitiesInfo([])
       setLoadingCities(false)
     }
+  }
 
+  // Función de éxito para obtener la posición actual
+  const success = (pos) => {
+    const lat = pos.coords.latitude;
+    const lon = pos.coords.longitude;
+    fetchWeather(lat, lon);
+  };
+
+  const hiddenModal = () => {
+    setIsShowModal(false)
+  }
+
+  // Efecto para obtener la ubicación actual al montar el componente
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(success);
+  }, []);
+
+  useEffect(() => {
+    fetchCities()
   }, [cityName])
 
 
@@ -81,14 +86,15 @@ function App() {
 
         <h1 className="py-4 font-semibold text-xl">Weater App</h1>
         <Header
-          handleSubmit={handleSubmit}
           cityName={cityName}
           setCityName={setCityName}
           citiesInfo={citiesInfo}
           fetchWeather={fetchWeather}
           setIsShowModal={setIsShowModal}
           isShowModal={isShowModal}
-          loadingCities={loadingCities} />
+          loadingCities={loadingCities}
+          hiddenModal={hiddenModal}
+          fetchCities={fetchCities} />
 
         {weatherInfo ? <Weather weatherInfo={weatherInfo} /> : <Loader />}
 
