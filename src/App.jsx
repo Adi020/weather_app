@@ -80,7 +80,7 @@ function App() {
       <main
         className={`${weatherInfo ? bgImages[weatherInfo?.weather[0].icon] : "n9"
           } px-5 color bg-cover relative color min-h-screen text-white grid grid-cols-[1fr_minmax(auto,_400px)_1fr] 
-          grid-rows-[1fr_auto_0.7fr] max-[640px]:grid-cols-[minmax(auto,_400px)] max-[640px]:items-center
+          grid-rows-[1fr_auto_0.9fr] max-[640px]:grid-cols-[minmax(auto,_400px)] max-[640px]:items-center
           place-content-center max-[640px]:grid-rows-[auto_auto_1fr] font-principal-font`}
       >
 
