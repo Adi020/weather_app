@@ -18,7 +18,7 @@ const Header = ({
 
 	//obtener una ciudad
 	const fetchCity = () => {
-		const URLCity = `geo/1.0/direct?q=${cityName}&limit=1`;
+		const URLCity = `geo/1.0/direct?q=${cityName.trim().toLowerCase()}&limit=1`;
 		axiosWeather.get(URLCity)
 			.then(({ data }) => {
 				const { lat, lon } = data[0]
