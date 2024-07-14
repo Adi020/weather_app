@@ -15,7 +15,7 @@ const Header = ({
 }) => {
 	const formRef = useRef(null);
 
-	//obtener una ciudad
+	// obtener una ciudad
 	const fetchCity = () => {
 		const URLCity = `geo/1.0/direct?q=${cityName}&limit=1`;
 		axiosWeather.get(URLCity)
