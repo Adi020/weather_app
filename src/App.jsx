@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./App.css";
+import axios from "axios";
 import Weather from "./components/Weather";
 import Loader from "./components/Loader";
 import bgImages from "./components/bgImages";
@@ -31,7 +32,7 @@ function App() {
   //función para manejar la obtencion de las ciudades
   const fetchCities = async () => {
     setLoadingCities(true)
-    const URLCity = `geo/1.0/direct?q=${cityName}&limit=5`;
+    const URLCity = `geo/1.0/direct?q=${cityName.trim().toLowerCase()}&limit=5`;
     try {
       const { data } = await axiosWeather.get(URLCity, { signal: controller.signal, })
       setCitiesInfo(data)
