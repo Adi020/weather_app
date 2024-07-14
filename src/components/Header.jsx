@@ -62,7 +62,7 @@ const Header = ({
         <form ref={formRef} onSubmit={handleSubmit}>
           <div className="flex p-[2px] justify-center items-center bg-[#53a8ca] rounded-3xl h-10">
             <button className="w-9 flex justify-center"><i className="bx bx-search text-xl"></i></button>
-            <input onFocus={showModal} value={cityName}
+            <input onFocus={showModal} autoComplete="off"  value={cityName}
               onChange={handleInputChange} className="w-full h-full rounded-full text-xl grid text-white 
             placeholder-white bg-[#03cdff] px-2 outline-none" type="text" placeholder="search" id="cityName" />
           </div>
