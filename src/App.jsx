@@ -29,7 +29,7 @@ function App() {
   };
 
   //función para manejar la obtencion de las ciudades
-  const fetchCities = async (fun) => {
+  const fetchCities = async () => {
     setLoadingCities(true)
     const URLCity = `geo/1.0/direct?q=${cityName}&limit=5`;
     try {
