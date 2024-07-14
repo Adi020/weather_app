@@ -5,6 +5,7 @@ import Weather from "./components/Weather";
 import Loader from "./components/Loader";
 import bgImages from "./components/bgImages";
 import Header from "./components/Header";
+import { axiosWeather } from "./utils/ConfigAxios";
 
 function App() {
   const [weatherInfo, setWeatherInfo] = useState(null);
@@ -13,6 +14,8 @@ function App() {
   const [isShowModal, setIsShowModal] = useState(false)
   const [loadingCities, setLoadingCities] = useState(false)
 
+  const controller = new AbortController();
+
   // funcion para ocultar el modal
   const handleClickHiddenModal = () => {
     setIsShowModal(false)
@@ -20,39 +23,24 @@ function App() {
 
   // Función para manejar la obtención de la ubicación actual y la información del clima
   const fetchWeather = (lat, lon) => {
-    const API_KEY = "f65121de84823584a220722a6bcba375";
-    const URL = `https://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${lon}&appid=${API_KEY}`;
-
-    axios.get(URL)
+    const URLWeater = `data/2.5/weather?lat=${lat}&lon=${lon}`;
+    axiosWeather.get(URLWeater)
       .then(({ data }) => setWeatherInfo(data))
       .catch((err) => console.error(err));
   };
 
   //función para manejar la obtencion de las ciudades
-  const fetchCities = (fun) => {
-
-    const API_KEY = "f65121de84823584a220722a6bcba375";
-    const URLCity = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${API_KEY}`;
-
-    if (cityName) {
-      const fetchData = async () => {
-        setLoadingCities(true)
-        try {
-          const { data } = await axios.get(URLCity)
-          fun(data)
-        } catch (err) {
-          if (axios.isCancel(err)) {
-            console.log('Petición cancelada');
-          } else {
-            console.log(err);
-          }
-        } finally {
-          setLoadingCities(false)
-        }
-      }
-      fetchData()
-    } else {
-      setCitiesInfo([])
+  const fetchCities = async (fun) => {
+    setLoadingCities(true)
+    const URLCity = `geo/1.0/direct?q=${cityName}&limit=5`;
+    try {
+      const { data } = await axiosWeather.get(URLCity, { signal: controller.signal, })
+      setCitiesInfo(data)
+    } catch (error) {
+      if (!axios.isCancel(error)) {
+        console.log(error)
+      };
+    } finally {
       setLoadingCities(false)
     }
   }
@@ -64,6 +52,7 @@ function App() {
     fetchWeather(lat, lon);
   };
 
+  // ocultar el modal
   const hiddenModal = () => {
     setIsShowModal(false)
   }
@@ -75,10 +64,11 @@ function App() {
 
   // Efecto para obtener las ciudades por cambio de nombre
   useEffect(() => {
-    const setCities = (cities) => {
-      setCitiesInfo(cities)
+    if (cityName) {
+      fetchCities()
+    } else {
+      setCitiesInfo([])
     }
-    fetchCities(setCities)
   }, [cityName])
 
 
@@ -101,7 +91,7 @@ function App() {
           isShowModal={isShowModal}
           loadingCities={loadingCities}
           hiddenModal={hiddenModal}
-          fetchCities={fetchCities} />
+          controller={controller} />
 
         {weatherInfo ? <Weather weatherInfo={weatherInfo} /> : <Loader />}
 
