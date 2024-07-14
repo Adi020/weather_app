@@ -13,6 +13,7 @@ function App() {
   const [isShowModal, setIsShowModal] = useState(false)
   const [loadingCities, setLoadingCities] = useState(false)
 
+  // funcion para ocultar el modal
   const handleClickHiddenModal = () => {
     setIsShowModal(false)
   }
@@ -29,6 +30,7 @@ function App() {
 
   //función para manejar la obtencion de las ciudades
   const fetchCities = (fun) => {
+
     const API_KEY = "f65121de84823584a220722a6bcba375";
     const URLCity = `https://api.openweathermap.org/geo/1.0/direct?q=${cityName}&limit=5&appid=${API_KEY}`;
 
@@ -37,14 +39,15 @@ function App() {
         setLoadingCities(true)
         try {
           const { data } = await axios.get(URLCity)
-          setCitiesInfo(data)
+          fun(data)
         } catch (err) {
-          console.log(err)
+          if (axios.isCancel(err)) {
+            console.log('Petición cancelada');
+          } else {
+            console.log(err);
+          }
         } finally {
           setLoadingCities(false)
-          if (fun) {
-            fun()
-          }
         }
       }
       fetchData()
@@ -70,8 +73,12 @@ function App() {
     navigator.geolocation.getCurrentPosition(success);
   }, []);
 
+  // Efecto para obtener las ciudades por cambio de nombre
   useEffect(() => {
-    fetchCities()
+    const setCities = (cities) => {
+      setCitiesInfo(cities)
+    }
+    fetchCities(setCities)
   }, [cityName])
 
 
@@ -80,7 +87,7 @@ function App() {
       <main
         className={`${weatherInfo ? bgImages[weatherInfo?.weather[0].icon] : "n9"
           } px-5 color bg-cover relative color min-h-screen text-white grid grid-cols-[1fr_minmax(auto,_400px)_1fr] 
-          grid-rows-[1fr_auto_0.9fr] max-[640px]:grid-cols-[minmax(auto,_400px)] max-[640px]:items-center
+          grid-rows-[1fr_auto_0.7fr] max-[640px]:grid-cols-[minmax(auto,_400px)] max-[640px]:items-center
           place-content-center max-[640px]:grid-rows-[auto_auto_1fr] font-principal-font`}
       >
 
