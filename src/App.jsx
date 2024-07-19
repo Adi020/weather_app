@@ -81,7 +81,7 @@ function App() {
           place-content-center max-[640px]:grid-rows-[auto_auto_1fr] font-principal-font`}
       >
 
-        <h1 className="py-4 font-semibold text-xl">Weater App</h1>
+        <h1 className="py-4 font-semibold text-xl">Weather App</h1>
         <Header
           cityName={cityName}
           setCityName={setCityName}
