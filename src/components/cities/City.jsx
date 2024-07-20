@@ -10,16 +10,16 @@ const City = ({ city, fetchWeather, hiddenModal }) => {
   }
 
   return (
-    <article onClick={handleClickCity} className="bg-[#05283d] hover:bg-[#0e334d] p-1 rounded-md border-gray-600 border cursor-pointer
+    <article onClick={handleClickCity} className="bg-[#05283d] gap-2 hover:bg-[#0e334d] p-1 rounded-md border-gray-600 border cursor-pointer
     grid grid-cols-[1fr_1fr]">
-      <h2 className="font-bold text-lg truncate">{city.name}</h2>
-      <div className="flex gap-2">
+      <h2 className="font-bold col-span-2 place-content-center line-through text-lg">{city.name}, {city.state}, {city.country}</h2>
+      <div className="flex gap-2 overflow-hidden">
         <span className="font-bold">Lat:</span>
-        <span>{city.lat}</span>
+        <span className="truncate">{city.lat}</span>
       </div>
-      <div className="flex gap-2 col-start-2">
-        <span className="font-bold break-words">Lon:</span>
-        <span>{city.lon}</span>
+      <div className="flex gap-2 overflow-hidden">
+        <span className="font-bold">Lon:</span>
+        <span className="truncate">{city.lon}</span>
       </div>
     </article>
   )
