@@ -9,41 +9,39 @@ import { axiosWeather } from "./utils/ConfigAxios";
 
 function App() {
   const [weatherInfo, setWeatherInfo] = useState(null);
-  const [cityName, setCityName] = useState('')
-  const [citiesInfo, setCitiesInfo] = useState([])
-  const [isShowModal, setIsShowModal] = useState(false)
-  const [loadingCities, setLoadingCities] = useState(false)
+  const [cityName, setCityName] = useState("");
+  const [citiesInfo, setCitiesInfo] = useState([]);
+  const [isShowModal, setIsShowModal] = useState(false);
+  const [loadingCities, setLoadingCities] = useState(false);
 
   const controller = new AbortController();
 
   // funcion para ocultar el modal
   const handleClickHiddenModal = () => {
-    setIsShowModal(false)
-  }
+    setIsShowModal(false);
+  };
 
   // Función para manejar la obtención de la ubicación actual y la información del clima
   const fetchWeather = (lat, lon) => {
     const URLWeater = `data/2.5/weather?lat=${lat}&lon=${lon}`;
-    axiosWeather.get(URLWeater)
+    axiosWeather
+      .get(URLWeater)
       .then(({ data }) => setWeatherInfo(data))
       .catch((err) => console.error(err));
   };
 
   //función para manejar la obtencion de las ciudades
-  const fetchCities = async () => {
-    setLoadingCities(true)
+  const fetchCities = () => {
+    setLoadingCities(true);
     const URLCity = `geo/1.0/direct?q=${cityName.trim().toLowerCase()}&limit=5`;
-    try {
-      const { data } = await axiosWeather.get(URLCity, { signal: controller.signal, })
-      setCitiesInfo(data)
-    } catch (error) {
-      if (!axios.isCancel(error)) {
-        console.log(error)
-      };
-    } finally {
-      setLoadingCities(false)
-    }
-  }
+    axiosWeather
+      .get(URLCity, { signal: controller.signal })
+      .then(({ data }) => setCitiesInfo(data))
+      .catch((err) => {
+        if (!axios.isCancel(err)) console.log(err);
+      })
+      .finally(() => setLoadingCities(false));
+  };
 
   // Función de éxito para obtener la posición actual
   const success = (pos) => {
@@ -54,8 +52,8 @@ function App() {
 
   // ocultar el modal
   const hiddenModal = () => {
-    setIsShowModal(false)
-  }
+    setIsShowModal(false);
+  };
 
   // Efecto para obtener la ubicación actual al montar el componente
   useEffect(() => {
@@ -65,22 +63,21 @@ function App() {
   // Efecto para obtener las ciudades por cambio de nombre
   useEffect(() => {
     if (cityName) {
-      fetchCities()
+      fetchCities();
     } else {
-      setCitiesInfo([])
+      setCitiesInfo([]);
     }
-  }, [cityName])
-
+  }, [cityName]);
 
   return (
     <>
       <main
-        className={`${weatherInfo ? bgImages[weatherInfo?.weather[0].icon] : "n9"
-          } px-5 color bg-cover relative color min-h-screen text-white grid grid-cols-[1fr_minmax(auto,_400px)_1fr] 
+        className={`${
+          weatherInfo ? bgImages[weatherInfo?.weather[0].icon] : "n9"
+        } px-5 color bg-cover relative color min-h-screen text-white grid grid-cols-[1fr_minmax(auto,_400px)_1fr] 
           grid-rows-[1fr_auto_0.7fr] max-[640px]:grid-cols-[minmax(auto,_400px)] max-[640px]:items-center
           place-content-center max-[640px]:grid-rows-[auto_auto_1fr] font-principal-font`}
       >
-
         <h1 className="py-4 font-semibold text-xl">Weather App</h1>
         <Header
           cityName={cityName}
@@ -91,13 +88,18 @@ function App() {
           isShowModal={isShowModal}
           loadingCities={loadingCities}
           hiddenModal={hiddenModal}
-          controller={controller} />
+          controller={controller}
+        />
 
         {weatherInfo ? <Weather weatherInfo={weatherInfo} /> : <Loader />}
 
-        {isShowModal && <div onClick={handleClickHiddenModal} className='fixed top-0 left-0 right-0 bottom-0
-         bg-slate-800/80 z-10'></div>}
-
+        {isShowModal && (
+          <div
+            onClick={handleClickHiddenModal}
+            className="fixed top-0 left-0 right-0 bottom-0
+         bg-slate-800/80 z-10"
+          ></div>
+        )}
       </main>
     </>
   );
