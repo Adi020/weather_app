@@ -71,14 +71,15 @@ const Header = ({
             />
           </div>
         </form>
-
-        <CitiesList
+        {citiesInfo && 
+          <CitiesList
           citiesInfo={citiesInfo}
           fetchWeather={fetchWeather}
           isShowModal={isShowModal}
           hiddenModal={hiddenModal}
           loadingCities={loadingCities}
         />
+        }
       </div>
     </header>
   );
