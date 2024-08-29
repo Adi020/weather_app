@@ -45,9 +45,8 @@ function App() {
 
   // Función de éxito para obtener la posición actual
   const success = (pos) => {
-    const lat = pos.coords.latitude;
-    const lon = pos.coords.longitude;
-    fetchWeather(lat, lon);
+    const { latitude, longitude } = pos.coords;
+    fetchWeather(latitude, longitude);
   };
 
   // ocultar el modal
