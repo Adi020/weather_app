@@ -3,75 +3,75 @@
 @tailwind utilities;
 
 .n1 {
-  background-image: url('bg-images/01n.webp');
+  background-image: url('/public/bg-images/01n.webp');
 }
 
 .n2 {
-  background-image: url('bg-images/02n.webp');
+  background-image: url('/public/bg-images/02n.webp');
 }
 
 .n3 {
-  background-image: url('bg-images/03n.webp');
+  background-image: url('/public/bg-images/03n.webp');
 }
 
 .n4 {
-  background-image: url('bg-images/04n.webp');
+  background-image: url('/public/bg-images/04n.webp');
 }
 
 .n9 {
-  background-image: url('bg-images/09n.webp');
+  background-image: url('/public/bg-images/09n.webp');
 }
 
 .n10 {
-  background-image: url('bg-images/10n.webp');
+  background-image: url('/public/bg-images/10n.webp');
 }
 
 .n11 {
-  background-image: url('bg-images/11n.webp');
+  background-image: url('/public/bg-images/11n.webp');
 }
 
 .n13 {
-  background-image: url('bg-images/13n.webp');
+  background-image: url('/public/bg-images/13n.webp');
 }
 
 .n50 {
-  background-image: url('bg-images/50n.webp');
+  background-image: url('/public/bg-images/50n.webp');
 }
 
 .d1 {
-  background-image: url('bg-images/01d.webp');
+  background-image: url('/public/bg-images/01d.webp');
 }
 
 .d2 {
-  background-image: url('bg-images/02d.webp');
+  background-image: url('/public/bg-images/02d.webp');
 }
 
 .d3 {
-  background-image: url('bg-images/03d.webp');
+  background-image: url('/public/bg-images/03d.webp');
 }
 
 .d4 {
-  background-image: url('bg-images/04d.webp');
+  background-image: url('/public/bg-images/04d.webp');
 }
 
 .d9 {
-  background-image: url('bg-images/09d.webp');
+  background-image: url('/public/bg-images/09d.webp');
 }
 
 .d10 {
-  background-image: url('bg-images/10d.webp');
+  background-image: url('/public/bg-images/10d.webp');
 }
 
 .d11 {
-  background-image: url('bg-images/11d.webp');
+  background-image: url('/public/bg-images/11d.webp');
 }
 
 .d13 {
-  background-image: url('bg-images/13d.webp');
+  background-image: url('/public/bg-images/13d.webp');
 }
 
 .d50 {
-  background-image: url('bg-images/50d.webp');
+  background-image: url('/public/bg-images/50d.webp');
 }
 
 html {
