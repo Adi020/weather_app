@@ -1,0 +1,122 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.n1 {
+  background-image: url('bg-images/01n.webp');
+}
+
+.n2 {
+  background-image: url('bg-images/02n.webp');
+}
+
+.n3 {
+  background-image: url('bg-images/03n.webp');
+}
+
+.n4 {
+  background-image: url('bg-images/04n.webp');
+}
+
+.n9 {
+  background-image: url('bg-images/09n.webp');
+}
+
+.n10 {
+  background-image: url('bg-images/10n.webp');
+}
+
+.n11 {
+  background-image: url('bg-images/11n.webp');
+}
+
+.n13 {
+  background-image: url('bg-images/13n.webp');
+}
+
+.n50 {
+  background-image: url('bg-images/50n.webp');
+}
+
+.d1 {
+  background-image: url('bg-images/01d.webp');
+}
+
+.d2 {
+  background-image: url('bg-images/02d.webp');
+}
+
+.d3 {
+  background-image: url('bg-images/03d.webp');
+}
+
+.d4 {
+  background-image: url('bg-images/04d.webp');
+}
+
+.d9 {
+  background-image: url('bg-images/09d.webp');
+}
+
+.d10 {
+  background-image: url('bg-images/10d.webp');
+}
+
+.d11 {
+  background-image: url('bg-images/11d.webp');
+}
+
+.d13 {
+  background-image: url('bg-images/13d.webp');
+}
+
+.d50 {
+  background-image: url('bg-images/50d.webp');
+}
+
+html {
+  font-size: 11px;
+}
+
+.weather__modal {
+  @apply flex justify-center items-center;
+}
+
+.overlay {
+  @apply bg-black/50 fixed top-0 px-3 left-0 right-0 bottom-0 z-20;
+}
+
+.header__modal-active .modal__content {
+  @apply w-[min(100%,_500px)] mx-auto mt-24;
+}
+
+.header__modal-active ul {
+  @apply p-[.7em] bg-primary  rounded-2xl;
+}
+
+@media only screen and (min-width: 320px) {
+  html {
+    font-size: 12px;
+  }
+}
+
+@media only screen and (min-width: 480px) {
+  html {
+    font-size: 15px;
+  }
+}
+
+@media only screen and (min-width: 767px) {
+  html {
+    font-size: 17px;
+  }
+}
+@media only screen and (min-width: 800px) {
+  .header__modal-active .modal__content {
+    @apply mt-[3.7rem];
+  }
+}
+
+#modal .header__modal-active ul {
+  @apply text-white text-lg font-bold;
+}
