@@ -1,6 +1,5 @@
 export * from './Header';
 export * from './Weather';
-export * from './Form';
 export * from './Modal';
 export * from './Loader';
 export * from './Footer';
