@@ -6,11 +6,7 @@ import { bgImages } from './utils/bgImages';
 import ModalLayout from './components/ModalLayout';
 
 function App() {
-  const {
-    data: weatherInfo,
-    fetch: weatherFetch,
-    loading: weatherLoading,
-  } = useApi(getWeatherInfo);
+  const [[weatherInfo, weatherLoading], [weatherFetch]] = useApi(getWeatherInfo);
 
   const success: PositionCallback = (position) => {
     const { latitude: lat, longitude: lon } = position.coords;
