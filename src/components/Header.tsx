@@ -17,12 +17,7 @@ type InputEvent = ChangeEvent<HTMLInputElement>;
 
 export const Header = ({ weatherFetch }: Props) => {
   const [cityValue, setCityValue] = useState('');
-  const {
-    data: cities,
-    loading: loadingCities,
-    fetch: fetchCities,
-    setDataState: setCities,
-  } = useApi(getCitiesInfo);
+  const [[cities, loadingCities], [fetchCities, setCities]] = useApi(getCitiesInfo);
   const { closeModal, openModal } = useModalState();
 
   const inputRef = useRef<HTMLInputElement>(null);
@@ -82,6 +77,7 @@ export const Header = ({ weatherFetch }: Props) => {
           onChange={handleChangeInput}
           onFocus={handleInputFocus}
           ref={inputRef}
+          autoComplete="off"
         />
         <button disabled={loadingCities} className=" h-full aspect-square">
           <i className="bx bx-search-alt"></i>
