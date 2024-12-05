@@ -5,13 +5,13 @@ type Data<T> = T | null;
 type CustomError = Error | null;
 type IsLoad = boolean;
 
-interface UseApiResult<T, P extends any[]> {
-  loading: IsLoad;
-  error: CustomError;
-  data: Data<T>;
-  fetch: (...props: FetchExtraCallback<T, P>) => (reason?: any) => void;
-  setDataState: (param?: Data<T>) => void;
-}
+type UseApiResult<T, P extends any[]> = [
+  [data: Data<T>, loading: IsLoad, error: CustomError],
+  [
+    fetch: (...props: FetchExtraCallback<T, P>) => (reason?: any) => void,
+    setDataState: (param?: Data<T>) => void
+  ]
+];
 
 type UseApiOptions<T, P> = {
   defaultValue?: T;
@@ -67,11 +67,8 @@ export const useApi = <T, P extends any[]>(
       fetch(...options.params);
     }
   }, [fetch, options?.params]);
-  return {
-    data,
-    loading,
-    error,
-    fetch,
-    setDataState,
-  };
+  return [
+    [data, loading, error],
+    [fetch, setDataState],
+  ];
 };
